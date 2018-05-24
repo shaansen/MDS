@@ -133,18 +133,40 @@
 
   enter_points.append('circle').attr({
     r: 4
-  });
+  }).on("mouseover", handleMouseOver)
+    .on("mouseout", handleMouseOut);;
 
   enter_points.append('text').text(function(d, i) {
     return keys[i];
   }).attr({
     y: 12,
-    dy: '0.35em'
+    dy: '-2em'
   });
 
   enter_points.append('title').text(function(d, i) {
     return d[0] + ", " + d[1];
   });
+
+  // Create Event Handlers for mouse
+      function handleMouseOver(d, i) {  // Add interactivity
+          console.log("HandleMouseOver")
+            // Use D3 to select element, change color and size
+            d3.select(this).attr({
+              fill: "orange",
+              r: 10
+            });
+          }
+
+      function handleMouseOut(d, i) {
+            // Use D3 to select element, change color back to normal
+          console.log("HandleMouseOut")
+
+            d3.select(this).attr({
+              fill: "teal",
+              r: 5
+            });
+
+          }
 
   indicators = svg.selectAll('.indicator').data(links_data);
 
